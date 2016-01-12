@@ -1,4 +1,5 @@
 import time
+import re
 from welcome import *
 
 
@@ -18,25 +19,53 @@ def main():
         # import available modules
         # print any errors while loading modules
 
-        # enable background process (if idle, break!!! go back to welcome message to ask if person is new!)
-        agreements = ['yes', 'ya']
+        welcomeText()
 
-        start_time = time.time()
+        # enable background process (if idle, break!!! go back to welcome message to ask if person is new!)
+        agreements = {'accepted': ['yes', 'ya'], 'learning': []}
+
+        thetime = time.time()
         request = raw_input(">>  ")
-        end_time = time.time() - start_time
-        if(end_time > 5):
-            print("Fred: Is that still you sir?")
-            request = raw_input(">>  ")
-            one = list((x for agree in agreements if agree in request))
-            if one:
-                print("Fred: good, hello again :3")
+        if(time.time() - 5 > thetime):
+            print("\n~~~~~~~~~~~~~~~~~~~~~~\n" +
+                  "Is that still you sir?")
+            confirm = raw_input(">>  ")
+            for agree in agreements['accepted']:
+                if agree in confirm:
+                    print("Nice to see you sir!")
+                    break
             else:
-                print("Fred: Does that mean yes?")
+                for agree in agreements['learning']:
+                    if agree in confirm:
+                        print("So you're telling me that \""+agree+"\" means yes?")
+                        reaffirm = raw_input(">>  ")
+                        for agree in agreements['accepted']:
+                            if agree in reaffirm:
+                                agreements['accepted'].append(agree)
+                                agreements['learning'].pop(agree)
+                                print("Thank you for helping me learn!")
+                                print("Welcome back sir.")
+                else:
+                    print("Fred: Does that mean yes?")
+                    reaffirm = raw_input(">>  ")
+                    for agree in agreements['accepted']:
+                        if agree in reaffirm:
+                            newwords = re.findall(r"[\w']+", confirm)
+                            for words in newwords:
+                                if words not in agreements['learning'] and words not in agreements['accepted']:
+                                    agreements['learning'].append(words)
+                                elif words not in agreements['accepted']:
+                                    agreements['accepted'].append(agree)
+                                    agreements['learning'].pop(agree)
+                            print("Thank you for helping me learn!")
+                            print("Welcome back sir.")
                 if request in agreements:
-                    agreements.append(request[4:])
+
                     print("Fred: very good sir, what can I do for you?")
         else:
             pass
+
+        print agreements
 
         if (request is not None or request is None):
             pass
