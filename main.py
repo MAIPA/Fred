@@ -1,4 +1,4 @@
-
+import time
 from welcome import *
 
 
@@ -19,10 +19,26 @@ def main():
         # print any errors while loading modules
 
         # enable background process (if idle, break!!! go back to welcome message to ask if person is new!)
+        agreements = ['yes', 'ya']
 
+        start_time = time.time()
         request = raw_input(">>  ")
+        end_time = time.time() - start_time
+        if(end_time > 5):
+            print("Fred: Is that still you sir?")
+            request = raw_input(">>  ")
+            one = list((x for agree in agreements if agree in request))
+            if one:
+                print("Fred: good, hello again :3")
+            else:
+                print("Fred: Does that mean yes?")
+                if request in agreements:
+                    agreements.append(request[4:])
+                    print("Fred: very good sir, what can I do for you?")
+        else:
+            pass
 
-        if (request != None or request == None):
+        if (request is not None or request is None):
             pass
             # disable idle watch process when input has been received!
 

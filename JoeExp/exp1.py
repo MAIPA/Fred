@@ -1,5 +1,6 @@
 import random
 
+
 def main():
     while True:
         greetings = ['hi', 'HI', 'Hi']
@@ -15,4 +16,4 @@ def main():
             print("I do not understand you.")
 
 if __name__ == '__main__':
-   main()
+    main()
