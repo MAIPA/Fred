@@ -1,6 +1,7 @@
 import time
 import re
-from welcome import *
+
+from Modules.welcome import *
 
 
 def main():
@@ -18,7 +19,6 @@ def main():
 
         # import available modules
         # print any errors while loading modules
-
         welcomeText()
 
         # enable background process (if idle, break!!! go back to welcome message to ask if person is new!)
