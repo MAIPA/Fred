@@ -1,5 +1,6 @@
 import time
 import re
+import random
 
 from Modules.welcome import *
 
@@ -11,8 +12,10 @@ def main():
 
     # pull in retained knowledge of active user
     # welcomeText() #eventually take in basic information about current user such as name
+    agreements = {'accepted': ['yes', 'ya'], 'learning': []}
+    insults = ['bugger', 'dumb dumb']
 
-    if(True):
+    while(True):
         # get module names from file
         # compare any changes to already loaded modules
         # update changes
@@ -22,11 +25,10 @@ def main():
         welcomeText()
 
         # enable background process (if idle, break!!! go back to welcome message to ask if person is new!)
-        agreements = {'accepted': ['yes', 'ya'], 'learning': []}
 
         thetime = time.time()
         request = raw_input(">>  ")
-        if(time.time() - 5 > thetime):
+        if(time.time() - 2 > thetime):
             print("\n~~~~~~~~~~~~~~~~~~~~~~\n" +
                   "Is that still you sir?")
             confirm = raw_input(">>  ")
@@ -35,14 +37,15 @@ def main():
                     print("Nice to see you sir!")
                     break
             else:
-                for agree in agreements['learning']:
-                    if agree in confirm:
-                        print("So you're telling me that \""+agree+"\" means yes?")
+                for learn in agreements['learning']:
+                    if learn in confirm:
+                        print("So you're telling me that \""+learn+"\" means yes?")
                         reaffirm = raw_input(">>  ")
                         for agree in agreements['accepted']:
                             if agree in reaffirm:
-                                agreements['accepted'].append(agree)
-                                agreements['learning'].pop(agree)
+                                print(agree)
+                                agreements['accepted'].append(learn)
+                                agreements['learning'].remove(learn)
                                 print("Thank you for helping me learn!")
                                 print("Welcome back sir.")
                 else:
@@ -56,16 +59,14 @@ def main():
                                     agreements['learning'].append(words)
                                 elif words not in agreements['accepted']:
                                     agreements['accepted'].append(agree)
-                                    agreements['learning'].pop(agree)
+                                    agreements['learning'].remove(agree)
                             print("Thank you for helping me learn!")
                             print("Welcome back sir.")
-                if request in agreements:
-
-                    print("Fred: very good sir, what can I do for you?")
+                            break
+                    print("You're being unclear you " + random.choice(insults))
+                    
         else:
             pass
-
-        print agreements
 
         if (request is not None or request is None):
             pass
