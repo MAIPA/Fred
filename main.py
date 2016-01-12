@@ -1,5 +1,5 @@
 import time
-from welcome import *
+from Modules.welcome import *
 
 
 def main():
@@ -17,7 +17,6 @@ def main():
 
         # import available modules
         # print any errors while loading modules
-
         # enable background process (if idle, break!!! go back to welcome message to ask if person is new!)
         agreements = ['yes', 'ya']
 
