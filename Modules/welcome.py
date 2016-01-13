@@ -7,7 +7,7 @@ users = ['joe', 'jakob']
 
 
 def welcomeText():
-    print("Hello! I am Fred.\n" + "What can I do for you?")
+    print("Hello! I am Fred.")
 
 
 def checkuser():
