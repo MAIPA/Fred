@@ -15,10 +15,12 @@ def checkuser():
     name = raw_input(">>  ")
     if name in users:
         loc = users.index(name)
+        curr_user = loc
         print("Ahh, hello " + users[loc] + ". What can I do for you?")
         return True
     else:
         users.append(name)
+        curr_user = name
         print("Nice to meet you " + name + ", I'm Fred, what can I do for you?")
         return True
 

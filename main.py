@@ -1,5 +1,7 @@
 import time
 
+curr_user = None
+
 from Modules.welcome import *
 
 
@@ -9,9 +11,11 @@ def main():
     # if already spoken to, check and see if they know who they are and if they exist in the brain yet
 
     # pull in retained knowledge of active user
-    # welcomeText() #eventually take in basic information about current user such as name
+    # welcomeText()
+    # eventually take in basic information about current user such as name
 
     welcomeText()
+    checkuser()
 
     while(True):
         # get module names from file
@@ -27,14 +31,8 @@ def main():
         request = raw_input(">>  ")
         if(time.time() - 2 > thetime):
             affirm = personunknown()
-
-            # Pseudo parse
-            # Eventually this will decide what to do with the input
             if affirm is True:
-                req = request.split()
-                print("Your request is made up of the words:"),
-                for word in req:
-                    print(" " + word)
+                print("This is where I am supposed to parse your input :/ but I can't yet")
             else:
                 checkuser()
                 print("This is where I am supposed to parse your input :/ but I can't yet")
