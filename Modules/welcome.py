@@ -13,6 +13,41 @@ def welcomeText():
 def checkuser():
     print("Could you tell me who this is?")
     name = raw_input(">>  ")
+    words = name.split()
+    if len(words) == 2:
+        print("Is " + words[1] + " your last name?")
+        confirm = raw_input(">>  ")
+        for agree in agreements['accepted']:
+            if agree in confirm:
+                print("Cool!"),
+                break
+        else:
+            for learn in agreements['learning']:
+                if learn in confirm:
+                    print("So you're telling me that \""+learn+"\" means yes?")
+                    reaffirm = raw_input(">>  ")
+                    for agree in agreements['accepted']:
+                        if agree in reaffirm:
+                            print(agree)
+                            agreements['accepted'].append(learn)
+                            agreements['learning'].remove(learn)
+                            print("Thank you for helping me learn!")
+                            break
+            else:
+                print("Does that mean yes?")
+                reaffirm = raw_input(">>  ")
+                for agree in agreements['accepted']:
+                    if agree in reaffirm:
+                        newwords = re.findall(r"[\w']+", confirm)
+                        for words in newwords:
+                            if words not in agreements['learning'] and words not in agreements['accepted']:
+                                agreements['learning'].append(words)
+                            elif words not in agreements['accepted']:
+                                agreements['accepted'].append(agree)
+                                agreements['learning'].remove(agree)
+                                print("Thank you for helping me learn!")
+                # print("You're being unclear you " + random.choice(insults))
+
     if name in users:
         loc = users.index(name)
         curr_user = loc
@@ -43,7 +78,6 @@ def personunknown():
                         agreements['accepted'].append(learn)
                         agreements['learning'].remove(learn)
                         print("Thank you for helping me learn!")
-                        print("Welcome back sir.")
                         return True
         else:
             print("Does that mean yes?")
@@ -60,5 +94,5 @@ def personunknown():
                             print("Thank you for helping me learn!")
                     print("Welcome back sir.")
                     return True
-            print("You're being unclear you " + random.choice(insults))
+            # print("You're being unclear you " + random.choice(insults))
             return False
